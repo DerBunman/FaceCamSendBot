@@ -6,11 +6,7 @@ import tempfile
 import face_recognition
 from PIL import Image, ImageDraw
 
-import telebot
 from telethon.sync import TelegramClient
-from telethon.tl.types import InputPeerUser, InputPeerChannel
-from telethon import TelegramClient, sync, events
-from telethon.tl.functions.channels import JoinChannelRequest
 
 config = configparser.ConfigParser()
 config.read('facecamsendbot.ini')
