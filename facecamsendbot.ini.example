@@ -1,0 +1,8 @@
+[telegram]
+api_id = 12345678
+api_hash = 1234567890aaffee1234567890affee1
+token = 1234567890:exampleexampleexaampleexampleexampl
+group_id = -12345678
+
+# your phone number
+phone = +491234567890
