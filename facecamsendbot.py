@@ -8,22 +8,16 @@ from PIL import Image, ImageDraw
 
 from telethon.sync import TelegramClient
 
+#import logging
+#logging.basicConfig(level=logging.INFO)
+
 config = configparser.ConfigParser()
 config.read('facecamsendbot.ini')
 
-telegram_client = TelegramClient('session',
+telegram_client = TelegramClient('bot',
                                  config['telegram']['api_id'],
-                                 config['telegram']['api_hash'])
-telegram_client.connect()
-
-# in case of script ran first time it will
-# ask either to input token or otp sent to
-# number or sent or your telegram id
-if not telegram_client.is_user_authorized():
-    print('This bot is not yet authorized.\nRequesting code for {}'.format(config['telegram']['phone']))
-    telegram_client.send_code_request(config['telegram']['phone'])
-    # signing in the telegram_client
-    telegram_client.sign_in(config['telegram']['phone'], input('Enter the code: '))
+                                 config['telegram']['api_hash']
+).start(bot_token=config['telegram']['token'])
 
 # validate input file
 if len(sys.argv) == 1:
