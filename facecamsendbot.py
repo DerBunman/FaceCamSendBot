@@ -41,14 +41,11 @@ pil_image = Image.fromarray(test_image)
 # Create a Pillow ImageDraw Draw instance to draw with
 draw = ImageDraw.Draw(pil_image)
 
-number_of_faces = len(face_locations)
-if number_of_faces < 1:
+if not face_locations:
     print("There where no faces detected.\nExiting ...")
     exit()
 
-for i in range(number_of_faces):
-    # get face location
-    top, right, bottom, left = face_locations[i]
+for top, right, bottom, left in face_locations:
     # Draw a box around the face using the Pillow module
     draw.rectangle(((left - 2, top - 2), (right + 2, bottom + 2)),
                    outline=(0, 0, 255),
@@ -66,7 +63,7 @@ try:
     recipient = telegram_client.get_input_entity(
         int(config['telegram']['group_id']))
     telegram_client.send_message(recipient,
-                                 "Number of faces: " + str(number_of_faces),
+                                 "Number of faces: " + str(len(face_locations)),
                                  file=picture_filename)
 except Exception as e:
     # there may be many error coming in while like peer
